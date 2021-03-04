@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    // "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=oneeappstorage;AccountKey=RdSHMEZ6ODYs8Q7srEiHoFeF3FUFf00qYoLxzCV1DKQ9iQB79QsYYF6l3YnVv0b1OJwhfT99BsAh6B3ApAemUw==",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  },
+  "ConnectionStrings": {
+    "MyConnectionString": "DefaultEndpointsProtocol=https;AccountName=oneeappstorage;AccountKey=RdSHMEZ6ODYs8Q7srEiHoFeF3FUFf00qYoLxzCV1DKQ9iQB79QsYYF6l3YnVv0b1OJwhfT99BsAh6B3ApAemUw=="
+  }
+}
