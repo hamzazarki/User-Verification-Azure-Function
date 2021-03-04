@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using AzureB2CUserFunction.Models;
 using AzureB2CUserFunction.Helpers;
 using Microsoft.Azure.Cosmos.Table;
-
+using System.Web.Http;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.File;
@@ -23,6 +23,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Text;
 //using static AzureB2CUserFunction.Helpers.TableRetriever;
 
 namespace AzureB2CUserFunction
@@ -41,20 +42,22 @@ namespace AzureB2CUserFunction
 
 
             //string valueToReturn;
-            var customresponse = new HttpRequestMessage();
-            var codereturntoclient = new ObjectResult("");
-            string signInName = req.Query["signInName"];
-            string password = req.Query["password"]; //"Nelite1234";//req.Query["password"];    
-
+            //var customresponse = new HttpRequestMessage();
+          //  var codereturntoclient = new ObjectResult("");
+            /*string signInName = req.Query["signInName"];
+            string password = req.Query["password"]; //"Nelite1234";//req.Query["password"];    */
+            
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
+            string SignInName = data?.SignInName;
+            string  password = data?.password;
             //emailAdress = emailAdress ?? data?.emailAdress;
             //password = password ?? data?.password;
-           // string enc = Encryptor.MD5Hash(password);
-            var userinfo = new User(signInName, password)
+            // string enc = Encryptor.MD5Hash(password);
+            var userinfo = new User(SignInName, password)
             {
-                signInName = signInName ?? data?.signInName,
+                SignInName = SignInName ?? data?.SignInName,
             //password =Encryptor.MD5Hash(password ?? data?.password)
             password = Encryptor.MD5Hash(password ?? data.password) //password ?? data?.password
             
@@ -74,7 +77,7 @@ namespace AzureB2CUserFunction
             var entities = table.ExecuteQuery(new TableQuery<UserEntity>().Where(
                 TableQuery.CombineFilters(
                     TableQuery.GenerateFilterCondition("Email", QueryComparisons.Equal,
-                       userinfo.signInName),
+                       userinfo.SignInName),
                     TableOperators.And,
                     TableQuery.GenerateFilterCondition("UserPassword", QueryComparisons.Equal,
                         userinfo.password)))).ToList();
@@ -206,7 +209,7 @@ namespace AzureB2CUserFunction
             _ = ExcelReader.GetExcelBlobData(sourceBlobFileName, connectionString, sourceContainerName);
 
             /*Azure Storage ------------------------------*/
-             var serializedUser = JsonConvert.SerializeObject(userinfo);
+             var serializedUser = JsonConvert.SerializeObject(userinfo, Formatting.Indented);
 
             /* string responseMessage = string.IsNullOrEmpty(serializedUser)
                 ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
@@ -214,6 +217,12 @@ namespace AzureB2CUserFunction
             //return codereturntoclient;
             //return customresponse.
             return new ObjectResult(serializedUser);
+            /* return new HttpResponseMessage(HttpStatusCode.OK)
+             {
+                 Content = new StringContent(serializedUser,Encoding.UTF8 , "application/json")
+             };*/
+
+
         }
     }
 }
