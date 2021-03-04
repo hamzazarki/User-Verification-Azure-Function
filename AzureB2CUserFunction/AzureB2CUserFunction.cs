@@ -33,7 +33,7 @@ namespace AzureB2CUserFunction
         private const HttpResponseHeader eTag = HttpResponseHeader.ETag;
         
         [FunctionName("AzureB2CUserFunction")]
-        public static async Task<IActionResult> run(
+        public static async Task<HttpResponseMessage> run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, [Table("Users")] CloudTable UserTable,
             ILogger log)
         {
@@ -43,15 +43,22 @@ namespace AzureB2CUserFunction
 
             //string valueToReturn;
             //var customresponse = new HttpRequestMessage();
-          //  var codereturntoclient = new ObjectResult("");
+            //  var codereturntoclient = new ObjectResult("");
             /*string signInName = req.Query["signInName"];
             string password = req.Query["password"]; //"Nelite1234";//req.Query["password"];    */
-            
+
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            //dynamic data = await req.Content.ReadAsAsync<User>();
+             dynamic data = JsonConvert.DeserializeObject(requestBody);
+            log.LogInformation($" body: {data}");
             string SignInName = data?.SignInName;
-            string  password = data?.password;
+            log.LogInformation($"SignInName : {SignInName}");
+            string password = data?.password;
+            log.LogInformation($"password : {password}");
+
+           /* string SignInName = data?.SignInName;
+            string  password = data?.password;*/
             //emailAdress = emailAdress ?? data?.emailAdress;
             //password = password ?? data?.password;
             // string enc = Encryptor.MD5Hash(password);
@@ -216,11 +223,15 @@ namespace AzureB2CUserFunction
                 : $"Hello, {serializedUser}. This HTTP triggered function executed successfully.";*/
             //return codereturntoclient;
             //return customresponse.
-            return new ObjectResult(serializedUser);
-            /* return new HttpResponseMessage(HttpStatusCode.OK)
+           // return new ObjectResult(serializedUser);
+            log.LogInformation("C# SEND HTTP RESPONSE");
+            log.LogInformation($"serializedUser: {serializedUser}");
+           //return new ObjectResult(serializedUser);
+            //log.LogInformation("C# END HTTP REQUEST");
+             return new HttpResponseMessage(HttpStatusCode.OK)
              {
-                 Content = new StringContent(serializedUser,Encoding.UTF8 , "application/json")
-             };*/
+                 Content = new StringContent(serializedUser,Encoding.UTF8,"application/json")
+             };
 
 
         }
