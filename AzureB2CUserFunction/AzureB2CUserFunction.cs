@@ -33,7 +33,7 @@ namespace AzureB2CUserFunction
         private const HttpResponseHeader eTag = HttpResponseHeader.ETag;
         
         [FunctionName("AzureB2CUserFunction")]
-        public static async Task<HttpResponseMessage> run(
+        public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, [Table("Users")] CloudTable UserTable,
             ILogger log)
         {
