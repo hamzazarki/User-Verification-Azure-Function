@@ -6,6 +6,8 @@
     "FUNCTIONS_WORKER_RUNTIME": "dotnet"
   },
   "ConnectionStrings": {
-    "MyConnectionString": "DefaultEndpointsProtocol=https;AccountName=oneeappstorage;AccountKey=RdSHMEZ6ODYs8Q7srEiHoFeF3FUFf00qYoLxzCV1DKQ9iQB79QsYYF6l3YnVv0b1OJwhfT99BsAh6B3ApAemUw=="
+    "MyConnectionString": "DefaultEndpointsProtocol=https;AccountName=oneeappstorage;AccountKey=RdSHMEZ6ODYs8Q7srEiHoFeF3FUFf00qYoLxzCV1DKQ9iQB79QsYYF6l3YnVv0b1OJwhfT99BsAh6B3ApAemUw==",
+    "ConnectionStringAzureSQL": "Server=tcp:autorelevedb.database.windows.net,1433;Initial Catalog=User_Services_PréProd;Persist Security Info=False;User ID=sqladmin;Password=P@ssw0rd2019;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+
   }
 }
