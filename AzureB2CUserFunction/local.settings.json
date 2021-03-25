@@ -1,13 +1,12 @@
 {
   "IsEncrypted": false,
   "Values": {
-    // "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=oneeappstorage;AccountKey=RdSHMEZ6ODYs8Q7srEiHoFeF3FUFf00qYoLxzCV1DKQ9iQB79QsYYF6l3YnVv0b1OJwhfT99BsAh6B3ApAemUw==",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "AzureSQLConnectionString": "Server=tcp:autorelevedb.database.windows.net,1433;Initial Catalog=User_Services_PrÃ©Prod;Persist Security Info=False;User ID=sqladmin;Password=P@ssw0rd2019;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   },
   "ConnectionStrings": {
     "MyConnectionString": "DefaultEndpointsProtocol=https;AccountName=oneeappstorage;AccountKey=RdSHMEZ6ODYs8Q7srEiHoFeF3FUFf00qYoLxzCV1DKQ9iQB79QsYYF6l3YnVv0b1OJwhfT99BsAh6B3ApAemUw==",
-    "ConnectionStringAzureSQL": "Server=tcp:autorelevedb.database.windows.net,1433;Initial Catalog=User_Services_PréProd;Persist Security Info=False;User ID=sqladmin;Password=P@ssw0rd2019;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-
+    "ConnectionStringAzureSQL": "Server=tcp:autorelevedb.database.windows.net,1433;Initial Catalog=User_Services_Prï¿½Prod;Persist Security Info=False;User ID=sqladmin;Password=P@ssw0rd2019;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   }
 }

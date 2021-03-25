@@ -49,8 +49,7 @@ namespace AzureB2CUserFunction
 
             //Connect to SQL
             //Connection String 
-            var cnnString = "Server=tcp:autorelevedb.database.windows.net,1433;Initial Catalog=User_Services_PréProd;Persist Security Info=False;User ID=sqladmin;Password=P@ssw0rd2019;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            
+            var cnnString = Environment.GetEnvironmentVariable("AzureSQLConnectionString");
             using (SqlConnection conn = new SqlConnection(cnnString))
             {
                 
